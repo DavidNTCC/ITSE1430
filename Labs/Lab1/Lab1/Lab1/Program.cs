@@ -20,32 +20,32 @@ namespace Lab1
                 switch (Char.ToUpper(choice))
                 {
                     case 'L':
-                    ListMovies();
-                    break;
+                    ListMovies(); break;
+
                     case 'A':
-                    AddMovie();
-                    break;
+                    AddMovie(); break;
+
                     case 'R':
-                    RemoveMovie
+                    RemoveMovie(); break;
+
                     case 'Q':
-                    quit = true;
-                    break;
+                    quit = true; break;
                 }
             };
         }
         static void AddMovie()
         {
             //Get name
-            _name = ReadString("Enter name: ", true);
+            _title = ReadString("Enter a title: ", true);
 
             //Get description
             _description = ReadString("Enter optional description: ", false);
 
             //Get length in minutes
-            _length = ReadInteger("Enter length in minutes: ", 0);
+            _duration = ReadInteger("Enter length in minutes: ", 0);
 
             //Get owned status
-            _owned = IsOwned();
+            _owned = ReadBool("Do you own this movie? (Y/N): ");
         }
 
         private static string ReadString( string message, bool isRequired )
@@ -90,55 +90,65 @@ namespace Lab1
             } while (true);
         }
 
-        private static bool IsOwned()
+        private static bool ReadBool( string message )
 
         {
-            do
+            while ( 0 == 0 )
             {
                 Console.Write(message);
 
-                string value = Console.ReadLine();
+                string choice = Console.ReadLine();
 
-                //If required or not empty
-                if (!isRequired || value != "")
-                    return value;
+                choice = choice.Trim();
 
-                Console.WriteLine("Value is required");
-            } while (true);
+                choice = choice.ToUpper();
 
+                if (String.Compare(choice, "Y", true) == 0)
+                    return true;
+                if (String.Compare(choice, "N", true) == 0)
+                    return false;
 
+                Console.WriteLine("Please enter Y or N");
+            }
+        }
+
+        private static void RemoveMovie()
+        {
+
+            bool choice = ReadBool($"Are you sure you want to delete {_title}? (Y/N)");
+
+            if (choice == true)
+            {
+                _title = null;
+                _description = null;
+                _duration = 0;
+                _owned = false;
+
+                Console.WriteLine("Movie successfully deleted");
+            } else Console.WriteLine($"{_title} was not deleted");
         }
 
         private static char DisplayMenu()
         {
             do
             {
-                Console.WriteLine("L)ist Products");
-                Console.WriteLine("A)dd Product");
+                Console.WriteLine("L)ist Movies");
+                Console.WriteLine("A)dd Movie");
+                Console.WriteLine("R)emove Movie");
                 Console.WriteLine("Q)uit");
 
                 string input = Console.ReadLine();
-
-                //Remove whitespace
+                
                 input = input.Trim();
-                //input.ToLower();
+               
                 input = input.ToUpper();
-
-                //Padding
-                //input = input.PadLeft(10);
-
-                //Starts with
-                //input.StartsWith(@"\");
-                //Ends with
-                //input.EndsWith(@"\");
-
-                //if (input == "L")
+                
                 if (String.Compare(input, "L", true) == 0)
                     return input[0];
-                //else if (input == "A")
                 if (String.Compare(input, "A", true) == 0)
                     return input[0];
-                // else if (input == "Q")
+                if (String.Compare(input, "R", true) == 0)
+                    return input[0];
                 if (String.Compare(input, "Q", true) == 0)
                     return input[0];
 
@@ -150,23 +160,28 @@ namespace Lab1
         static void ListMovies()
         {
             //Are there any movies?            
-            if (!String.IsNullOrEmpty(_name))
-            {//Display a product - name [$price]
-             //<description>
+            if (!String.IsNullOrEmpty(_title))
+            {
 
+                Console.WriteLine(_title);
 
-                string msg = $"{_name} - [${_price}]";
+                Console.WriteLine($"{_duration} minutes");
 
                 if (!String.IsNullOrEmpty(_description))
                     Console.WriteLine(_description);
 
+                if (_owned == true)
+                    Console.WriteLine("Owned");
+                else if (_owned == false)
+                    Console.WriteLine("Not Owned");
+
             } else
-                Console.WriteLine("No Products");
+                Console.WriteLine("No Movies");
         }
         //Data for a movie
-        static string _name;
+        static string _title;
         static string _description;
-        static int _length;
+        static int _duration;
         static bool _owned;
     }
 }
