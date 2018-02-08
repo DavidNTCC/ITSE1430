@@ -19,6 +19,7 @@ namespace Nile.Windows
 
         protected override void OnLoad( EventArgs e )
         {
+            //this is a comment
             base.OnLoad(e);
             
             var product = new Product();
