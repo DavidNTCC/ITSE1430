@@ -13,20 +13,25 @@ namespace DavidNaputi.MovieLib.Windows
         public MovieDetails()
         {
             InitializeComponent();
+            Shown += MovieDetails_Shown;
         }
 
-        public Movie MovieEntry { get; set; }
+        public Movie MovieEntry
+        {
+            get;
+            set;
+        }
 
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
-            if (!String.IsNullOrEmpty(MovieEntry.Title))
+            /*if (!String.IsNullOrEmpty(MovieEntry.Title)) //If the movie exists, then fill in the text boxes and checkbox accordingly
             {
                 _txtTitle.Text = MovieEntry.Title;
                 _txtDescription.Text = MovieEntry.Description;
                 _txtLength.Text = MovieEntry.Length.ToString();
                 _chkOwned.Checked = MovieEntry.IsOwned;
-            }
+            }*/
         }
 
         private void textBox3_TextChanged( object sender, EventArgs e )
@@ -36,7 +41,25 @@ namespace DavidNaputi.MovieLib.Windows
 
         private void MovieDetails_Load( object sender, EventArgs e )
         {
+            //if (MovieEntry.Title != null && Movie.Editing == true) //If the movie exists, then fill in the text boxes and checkbox accordingly
+            //{
+            //    _txtTitle.Text = MovieEntry.Title;
+            //    _txtDescription.Text = MovieEntry.Description;
+            //    _txtLength.Text = MovieEntry.Length.ToString();
+            //    _chkOwned.Checked = MovieEntry.IsOwned;
+            //}
+        }
+
+        private void MovieDetails_Shown( object sender, EventArgs e )
+        {
             
+            if (Movie.Editing == true && !String.IsNullOrEmpty(MovieEntry.Title))
+            {
+            _txtTitle.Text = MovieEntry.Title;
+            _txtDescription.Text = MovieEntry.Description;
+            _txtLength.Text = MovieEntry.Length.ToString();
+            _chkOwned.Checked = MovieEntry.IsOwned;
+            }
         }
 
         private void label1_Click( object sender, EventArgs e )
@@ -74,6 +97,7 @@ namespace DavidNaputi.MovieLib.Windows
             //Create movie
             var movie = new Movie();
 
+            //set properties
             movie.Title = _txtTitle.Text;
             movie.Description = _txtDescription.Text;
             movie.Length = ConvertToLength(_txtLength);
@@ -84,7 +108,7 @@ namespace DavidNaputi.MovieLib.Windows
             else if (movie.Length < 0)
                 MessageBox.Show(this, "Length must be a number greater than or equal to 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            if (!String.IsNullOrEmpty(movie.Title) && movie.Length >= 0)
+            if (!String.IsNullOrEmpty(movie.Title) && movie.Length >= 0) //Validate the data entered
             {
                 MovieEntry = movie;
                 DialogResult = DialogResult.OK;

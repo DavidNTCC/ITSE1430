@@ -53,7 +53,8 @@ namespace DavidNaputi.MovieLib.Windows
                 Movie.Editing = true;
                 var form = new MovieDetails();
                 form.Text = "Edit Movie";
-                
+                form.MovieEntry = _movie;
+
                 var result = form.ShowDialog();
                 if (result != DialogResult.OK)
                     return;
