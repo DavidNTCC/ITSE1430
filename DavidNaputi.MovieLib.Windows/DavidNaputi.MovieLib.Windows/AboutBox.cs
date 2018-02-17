@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ *  AboutBox.cs
+ *  David Naputi
+ *  ITSE 1430 MW 7:30
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -102,6 +107,11 @@ namespace DavidNaputi.MovieLib.Windows
         }
 
         private void labelProductName_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void okButton_Click( object sender, EventArgs e )
         {
 
         }

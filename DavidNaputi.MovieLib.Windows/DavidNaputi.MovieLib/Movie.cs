@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ *  Movie.cs
+ *  David Naputi
+ *  ITSE 1430 MW 7:30
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace DavidNaputi.MovieLib
 {
-    /// <summary></summary>
     public class Movie
     {
         /// <summary></summary>
@@ -16,7 +20,7 @@ namespace DavidNaputi.MovieLib
             set { _title = value; }
         }
 
-        /// <summary></summary>
+        /// <summary>Get or set the description</summary>
         public string Description
         {
             get { return _description ?? ""; }
@@ -41,6 +45,8 @@ namespace DavidNaputi.MovieLib
 
             return "";
         }
+
+        public static bool Editing{ get; set; }
 
         private string _title;
         private string _description;

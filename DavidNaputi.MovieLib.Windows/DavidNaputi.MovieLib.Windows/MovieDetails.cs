@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ *  MovieDetails.cs
+ *  David Naputi
+ *  ITSE 1430 MW 7:30
+ */
+using System;
 using System.Windows.Forms;
 
 namespace DavidNaputi.MovieLib.Windows
@@ -17,6 +15,20 @@ namespace DavidNaputi.MovieLib.Windows
             InitializeComponent();
         }
 
+        public Movie MovieEntry { get; set; }
+
+        protected override void OnLoad( EventArgs e )
+        {
+            base.OnLoad(e);
+            if (!String.IsNullOrEmpty(MovieEntry.Title))
+            {
+                _txtTitle.Text = MovieEntry.Title;
+                _txtDescription.Text = MovieEntry.Description;
+                _txtLength.Text = MovieEntry.Length.ToString();
+                _chkOwned.Checked = MovieEntry.IsOwned;
+            }
+        }
+
         private void textBox3_TextChanged( object sender, EventArgs e )
         {
 
@@ -24,7 +36,7 @@ namespace DavidNaputi.MovieLib.Windows
 
         private void MovieDetails_Load( object sender, EventArgs e )
         {
-
+            
         }
 
         private void label1_Click( object sender, EventArgs e )
@@ -32,7 +44,7 @@ namespace DavidNaputi.MovieLib.Windows
 
         }
 
-        private void textBox1_TextChanged( object sender, EventArgs e )
+        private void TextTitle( object sender, EventArgs e )
         {
 
         }
@@ -52,19 +64,45 @@ namespace DavidNaputi.MovieLib.Windows
 
         }
 
-        private void checkBox1_CheckedChanged( object sender, EventArgs e )
+        private void CheckBoxIsOwned( object sender, EventArgs e )
         {
 
         }
 
-        private void button1_Click( object sender, EventArgs e )
+        private void OnSave( object sender, EventArgs e )
         {
+            //Create movie
+            var movie = new Movie();
 
+            movie.Title = _txtTitle.Text;
+            movie.Description = _txtDescription.Text;
+            movie.Length = ConvertToLength(_txtLength);
+            movie.IsOwned = _chkOwned.Checked;
+
+            if (String.IsNullOrEmpty(movie.Title))
+                MessageBox.Show(this, "Title cannot be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else if (movie.Length < 0)
+                MessageBox.Show(this, "Length must be a number greater than or equal to 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            if (!String.IsNullOrEmpty(movie.Title) && movie.Length >= 0)
+            {
+                MovieEntry = movie;
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
-        private void button2_Click( object sender, EventArgs e )
+        private int ConvertToLength( TextBox control )
+        {
+            if (Int32.TryParse(control.Text, out var length) && length >= 0)
+                return length;
+
+            return -1;
+        }
+
+        private void OnCancel( object sender, EventArgs e )
         {
 
-        }
+        }       
     }
 }

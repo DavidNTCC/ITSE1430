@@ -23,7 +23,7 @@ namespace Nile.Windows
         }
 
         public Product Product { get; set; }
-        private void _OnSave( object sender, EventArgs e )
+        private void OnSave( object sender, EventArgs e )
         {
 
             //Create product
