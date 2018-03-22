@@ -3,7 +3,10 @@
  * Classwork
  */
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
+using Nile.Data;
 using Nile.Data.Memory;
 
 namespace Nile.Windows
@@ -44,7 +47,8 @@ namespace Nile.Windows
             _database.Add(form.Product, out var message);
             if (!String.IsNullOrEmpty(message))
                 MessageBox.Show(message);
-            
+
+            RefreshUI();
             //Find empty array element
             //var index = FindEmptyProductIndex();
             //if (index >= 0)
@@ -53,9 +57,8 @@ namespace Nile.Windows
 
         private void OnProductEdit( object sender, EventArgs e )
         {
-            //Get the first product
-            var products = _database.GetAll();
-            var product = (products.Length > 0) ? products[0] : null;
+            //Get selected product
+            var product = GetSelectedProduct();
             if (product == null)
                 return;
 
@@ -71,9 +74,12 @@ namespace Nile.Windows
                 return;
 
             //Update the product
-            _database.Edit(form.Product, out var message);
+            form.Product.Id = product.Id;
+            _database.Update(form.Product, out var message);
             if (!String.IsNullOrEmpty(message))
                 MessageBox.Show(message);
+
+            RefreshUI();
         }
 
         private void OnProductRemove( object sender, EventArgs e )
@@ -82,9 +88,8 @@ namespace Nile.Windows
             //if (index < 0)
             //  return;
 
-            //Get the first product
-            var products = _database.GetAll();
-            var product = (products.Length > 0) ? products[0] : null;
+            //Get the selected product
+            var product = GetSelectedProduct();
             if (product == null)
                 return;
 
@@ -94,6 +99,8 @@ namespace Nile.Windows
             //Remove product
             _database.Remove(product.Id);
             //_products[index] = null;
+
+            RefreshUI();
         }        
         
         private void OnHelpAbout( object sender, EventArgs e )
@@ -102,13 +109,25 @@ namespace Nile.Windows
         }
         #endregion
 
+        private Product GetSelectedProduct ( )
+        {
+            //TODO: Use the binding source
+            //Get the first selected row in the grid, if any
+            if (dataGridView1.SelectedRows.Count > 0)
+                return dataGridView1.SelectedRows[0].DataBoundItem as Product;
+
+            return null;
+        }
+
         private void RefreshUI ()
         {
             //Get products
             var products = _database.GetAll();
-            
+            //products[0].Name = "Product A";
+
             //Bind to grid
-            dataGridView1.DataSource = products;
+            productBindingSource.DataSource = new List<Product>(products);
+            //dataGridView1.DataSource 
         }
 
         private bool ShowConfirmation ( string message, string title )
@@ -118,11 +137,6 @@ namespace Nile.Windows
                            == DialogResult.Yes;
         }
 
-        private MemoryProductDatabase _database = new MemoryProductDatabase();
-
-        private void MainForm_Load( object sender, EventArgs e )
-        {
-
-        }
+        private IProductDatabase _database = new MemoryProductDatabase();
     }
 }
