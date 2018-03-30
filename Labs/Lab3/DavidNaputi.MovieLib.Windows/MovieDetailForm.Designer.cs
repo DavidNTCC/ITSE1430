@@ -1,6 +1,6 @@
 ﻿namespace DavidNaputi.MovieLib.Windows
 {
-    partial class MovieDetails
+    partial class MovieDetailForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this._txtTitle = new System.Windows.Forms.TextBox();
@@ -38,6 +39,8 @@
             this._labelLength = new System.Windows.Forms.Label();
             this._chkOwned = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
+            this._errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -136,7 +139,12 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "minutes";
             // 
-            // MovieDetails
+            // _errorProvider
+            // 
+            this._errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errorProvider.ContainerControl = this;
+            // 
+            // MovieDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -151,10 +159,11 @@
             this.Controls.Add(this._txtTitle);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "MovieDetails";
+            this.Name = "MovieDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Movie Details";
             this.Load += new System.EventHandler(this.MovieDetails_Load);
+            ((System.ComponentModel.ISupportInitialize)(this._errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,5 +181,6 @@
         private System.Windows.Forms.Label _labelLength;
         private System.Windows.Forms.CheckBox _chkOwned;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider _errorProvider;
     }
 }

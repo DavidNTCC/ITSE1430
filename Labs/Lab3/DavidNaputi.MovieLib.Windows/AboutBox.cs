@@ -20,7 +20,7 @@ namespace DavidNaputi.MovieLib.Windows
         {
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
+            this.labelMovieName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
@@ -106,12 +106,17 @@ namespace DavidNaputi.MovieLib.Windows
 
         }
 
-        private void labelProductName_Click( object sender, EventArgs e )
+        private void labelMovieName_Click( object sender, EventArgs e )
         {
 
         }
 
         private void okButton_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void AboutBox_Load( object sender, EventArgs e )
         {
 
         }
