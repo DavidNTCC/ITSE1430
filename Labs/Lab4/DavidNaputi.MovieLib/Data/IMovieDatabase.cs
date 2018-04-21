@@ -1,8 +1,4 @@
-﻿//using System;
-using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DavidNaputi.MovieLib.Data
 {
@@ -17,7 +13,7 @@ namespace DavidNaputi.MovieLib.Data
         /// <paramref name="movie"/> is null or invalid.
         /// A movie with the same name already exists.
         /// </remarks>
-        Movie Add( Movie movie, out string message );
+        Movie Add( Movie movie );
 
         Movie Get( int id );
 
@@ -43,6 +39,6 @@ namespace DavidNaputi.MovieLib.Data
         /// A movie with the same name already exists.
         /// The movie does not exist.
         /// </remarks>
-        Movie Update( Movie movie, out string message );
+        Movie Update( Movie movie );
     }
 }

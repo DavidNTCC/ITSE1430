@@ -6,12 +6,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DavidNaputi.MovieLib.Data;
 using DavidNaputi.MovieLib.Data.Memory;
@@ -57,9 +53,20 @@ namespace DavidNaputi.MovieLib.Windows
                 return;
 
             //Add to database
-            _database.Add(form.Movie, out var message);
-            if (!String.IsNullOrEmpty(message))
-                MessageBox.Show(message);
+            //_database.Add(form.Movie);
+            //if (!String.IsNullOrEmpty(message))
+            //    MessageBox.Show(message);
+
+            try
+            {
+                _database.Add(form.Movie);
+            } catch (NotImplementedException)
+            {
+                MessageBox.Show("Not implemented");
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            };
 
             RefreshUI();
 
@@ -149,21 +156,30 @@ namespace DavidNaputi.MovieLib.Windows
 
             //Update the movie
             form.Movie.Id = movie.Id;
-            _database.Update(form.Movie, out var message);
-            if (!String.IsNullOrEmpty(message))
-                MessageBox.Show(message);
+            //_database.Update(form.Movie, out var message);
+            //if (!String.IsNullOrEmpty(message))
+            //    MessageBox.Show(message);
+
+            try
+            {
+                _database.Update(form.Movie);
+            } catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            };
 
             RefreshUI();
         }
 
         private Movie GetSelectedMovie()
         {
-            //TODO: Use the binding source
-            //Get the first selected row in the grid, if any
-            if (movieDataGridView.SelectedRows.Count > 0)
-                return movieDataGridView.SelectedRows[0].DataBoundItem as Movie;
+            var items = (from r in movieDataGridView.SelectedRows.OfType<DataGridViewRow>()
+                         select new {
+                             Index = r.Index,
+                             Movie = r.DataBoundItem as Movie
+                         }).FirstOrDefault();
 
-            return null;
+            return items.Movie;
         }
 
         private void RefreshUI()
@@ -203,7 +219,7 @@ namespace DavidNaputi.MovieLib.Windows
 
         private IMovieDatabase _database = new MemoryMovieDatabase();
 
-        #endregion
+        
 
         private void OnFileExit( object sender, EventArgs e )
         {
@@ -231,5 +247,6 @@ namespace DavidNaputi.MovieLib.Windows
         }
 
         //private Movie _movie;
+        #endregion
     }
 }

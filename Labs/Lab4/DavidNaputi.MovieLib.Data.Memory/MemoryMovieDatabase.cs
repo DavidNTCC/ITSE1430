@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace DavidNaputi.MovieLib.Data.Memory
 {
-    
+
     /// <summary>Provides an in-memory movie database.</summary>
     public class MemoryMovieDatabase : MovieDatabase
     {
@@ -88,7 +85,7 @@ namespace DavidNaputi.MovieLib.Data.Memory
                     yield return Clone(movie);
             };
         }
-    
+
         protected override void RemoveCore( int id )
         {
             var existing = GetCore(id);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DavidNaputi.MovieLib.Data
 {
@@ -11,23 +9,29 @@ namespace DavidNaputi.MovieLib.Data
     {
         /// <summary>Add a new movie.</summary>
         /// <param name="movie">The movie to add.</param>
-        /// <param name="message">Error message.</param>
         /// <returns>The added movie.</returns>
         /// <remarks>
         /// Returns an error if movie is null, invalid or if a movie
         /// with the same name already exists.
         /// </remarks>
-        public Movie Add( Movie movie, out string message )
+        public Movie Add( Movie movie )
         {
             //Check for null
+            /*
             if (movie == null)
             {
                 message = "Movie cannot be null.";
                 return null;
             };
+            */
+
+            movie = movie ?? throw new ArgumentNullException(nameof(movie));
 
             //Validate movie using IValidatableObject
-            movie.Validate();
+            
+            
+                movie.Validate();
+            
             //var errors = ObjectValidator.Validate(movie);
             //if (errors.Count() > 0)
             //{
@@ -47,16 +51,13 @@ namespace DavidNaputi.MovieLib.Data
             // Verify unique movie
             var existing = GetMovieByTitleCore(movie.Title);
             if (existing != null)
-            {
-                message = "Movie already exists";
-                return null;
-            }
+                throw new Exception("Movie already exists");
             /*{
                 message = "Movie already exists.";
                 return null;
             };*/
 
-            message = null;
+            
             return AddCore(movie);
         }
 
@@ -76,7 +77,9 @@ namespace DavidNaputi.MovieLib.Data
         /// <returns>The list of movies.</returns>
         public IEnumerable<Movie> GetAll()
         {
-            return GetAllCore();
+            return from p in GetAllCore()
+                   orderby p.Title, p.Id descending
+                   select p;
         }
 
         /// <summary>Removes a movie.</summary>
@@ -87,10 +90,10 @@ namespace DavidNaputi.MovieLib.Data
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0");
 
-            if (id > 0)
-            {
+            //if (id > 0)
+            //{
                 RemoveCore(id);
-            };
+            //};
         }
 
         /// <summary>Edits an existing movie.</summary>
@@ -101,16 +104,13 @@ namespace DavidNaputi.MovieLib.Data
         /// Returns an error if movie is null, invalid, movie name
         /// already exists or if the movie cannot be found.
         /// </remarks>
-        public Movie Update( Movie movie, out string message )
+        public Movie Update( Movie movie )
         {
-            message = "";
+            //message = "";
 
             //Check for null
             if (movie == null)
-            {
-                message = "Movie cannot be null.";
-                return null;
-            };
+                throw new ArgumentNullException(nameof(movie));
 
             //Validate movie using IValidatableObject
             //var error = movie.Validate();
@@ -125,18 +125,12 @@ namespace DavidNaputi.MovieLib.Data
             // Verify unique movie
             var existing = GetMovieByTitleCore(movie.Title);
             if (existing != null && existing.Id != movie.Id)
-            {
-                message = "Movie already exists.";
-                return null;
-            };
+                throw new Exception("Movie already exists");
 
             //Find existing
             existing = existing ?? GetCore(movie.Id);
             if (existing == null)
-            {
-                message = "Movie not found.";
-                return null;
-            };
+                throw new ArgumentException("Movie not found", nameof(movie));
 
             return UpdateCore(movie);
         }
