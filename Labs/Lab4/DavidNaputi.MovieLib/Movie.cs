@@ -33,7 +33,7 @@ namespace DavidNaputi.MovieLib
         }
 
         /// <summary>Get or set the length</summary>
-        public int Length { get; set; } = 0;
+        public decimal Length { get; set; } = 0;
 
         /// <summary>Get or set the ownership status</summary>
         public bool IsOwned { get; set; }
