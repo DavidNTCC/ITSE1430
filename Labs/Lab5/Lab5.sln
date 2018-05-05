@@ -18,7 +18,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MovieDatabase", "MovieDatab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavidNaputi.MovieLib.Data.Sql", "DavidNaputi.MovieLib.Data.Sql\DavidNaputi.MovieLib.Data.Sql.csproj", "{51CEB49D-A771-4F9A-A349-271050CD0CF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{9213F3CC-1A65-4F34-88A2-17F1DF9EC580}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib.Web", "WebApplication1\MovieLib.Web.csproj", "{9213F3CC-1A65-4F34-88A2-17F1DF9EC580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
