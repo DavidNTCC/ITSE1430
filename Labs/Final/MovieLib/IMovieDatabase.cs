@@ -37,7 +37,7 @@ namespace MovieLib
         /// If the movie does not exist then nothing happens.
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="id"/> is less than or equal to zero.</exception>
-        bool Remove ( int id );
+        Movie Remove ( int id );
 
         /// <summary>Updates a movie.</summary>
         /// <param name="movie">The movie to add.</param>
