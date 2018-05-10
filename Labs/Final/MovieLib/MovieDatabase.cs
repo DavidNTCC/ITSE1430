@@ -46,9 +46,13 @@ namespace MovieLib.Data
 
         /// <summary>Gets all the movies.</summary>
         /// <returns>The list of movies.</returns>
-        public IEnumerable<Movie> Getall ()
+        public IEnumerable<Movie> GetAll ()
         {
-            return GetAllCore();
+            // CR1 Me - implemented GetAll() from IMovieDatabase - fixed capitalization
+            // CR5 Me - sorted movies by Title then by ID
+            return from p in GetAllCore()
+                   orderby p.Title, p.Id descending
+                   select p;
         }
 
         /// <summary>Removes a movie.</summary>

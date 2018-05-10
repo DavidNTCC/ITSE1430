@@ -51,6 +51,10 @@ namespace MovieLib
             //Length must be >= 0.
             if (Length < 0)
                 yield return new ValidationResult("Length must be >= 0.", new[] { "Length" });
+
+            // CR3 Me - added validation for release year
+            if (ReleaseYear < 1900 || ReleaseYear > 2100)
+                yield return new ValidationResult("Year must be between 1900 and 2100", new[] { "Release Year" });
         }
 
         #region Private Members

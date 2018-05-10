@@ -24,7 +24,7 @@ namespace MovieLib.Web.Models
 
         [Range(0, Int32.MaxValue)]
         public int Length { get; set; }
-
+        
         public Rating Rating { get; set; }
 
         [Display(Name = "Release Year")]

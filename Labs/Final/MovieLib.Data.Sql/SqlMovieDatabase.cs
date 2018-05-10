@@ -27,8 +27,9 @@ namespace MovieLib.Data.Sql
         /// <summary>Adds a movie.</summary>
         /// <param name="movie">The movie to add.</param>
         /// <returns>The added movie.</returns>
-        protected Movie AddCore ( Movie movie )
+        protected override Movie AddCore( Movie movie )
         {
+            //CR1 Me - added override to AddCore()
             using (var conn = new SqlConnection(_connectionString))
             {
                 var cmd = conn.CreateStoredProcedureCommand("AddMovie");
@@ -89,15 +90,17 @@ namespace MovieLib.Data.Sql
 
         /// <summary>Removes a movie.</summary>
         /// <param name="id">The ID of the movie.</param>
-        protected override void RemoveCore ( int id )
+        protected override void RemoveCore ( int Id )
         {
             using (var conn = new SqlConnection(_connectionString))
             {
                 var cmd = conn.CreateStoredProcedureCommand("RemoveMovie");
-                cmd.Parameters.AddWithValue("@id", id);
+               
+                cmd.Parameters.AddWithValue("@id", Id);
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
+                
             };
         }
 
@@ -109,6 +112,9 @@ namespace MovieLib.Data.Sql
             using (var conn = new SqlConnection(_connectionString))
             {
                 var cmd = conn.CreateStoredProcedureCommand("UpdateMovie");
+
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@id", movie.Id);
                 cmd.Parameters.AddWithValue("@title", movie.Title);
                 cmd.Parameters.AddWithValue("@description", movie.Description);
