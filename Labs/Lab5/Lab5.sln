@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavidNaputi.MovieLib.Windows", "DavidNaputi.MovieLib.Windows\DavidNaputi.MovieLib.Windows.csproj", "{65264252-4B97-412A-A0EA-51001F1B54D7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavidNaputi.MovieLib", "DavidNaputi.MovieLib\DavidNaputi.MovieLib.csproj", "{4579281F-C815-4BCA-9524-E9CDA641FDAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavidNaputi.MovieLib.Data.Memory", "DavidNaputi.MovieLib.Data.Memory\DavidNaputi.MovieLib.Data.Memory.csproj", "{E3873F15-76DC-4528-BCF0-7D3520CC0CA0}"
@@ -18,7 +16,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MovieDatabase", "MovieDatab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DavidNaputi.MovieLib.Data.Sql", "DavidNaputi.MovieLib.Data.Sql\DavidNaputi.MovieLib.Data.Sql.csproj", "{51CEB49D-A771-4F9A-A349-271050CD0CF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{9213F3CC-1A65-4F34-88A2-17F1DF9EC580}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieLib", "WebApplication1\MovieLib.csproj", "{9213F3CC-1A65-4F34-88A2-17F1DF9EC580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{65264252-4B97-412A-A0EA-51001F1B54D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65264252-4B97-412A-A0EA-51001F1B54D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65264252-4B97-412A-A0EA-51001F1B54D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65264252-4B97-412A-A0EA-51001F1B54D7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4579281F-C815-4BCA-9524-E9CDA641FDAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4579281F-C815-4BCA-9524-E9CDA641FDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4579281F-C815-4BCA-9524-E9CDA641FDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
